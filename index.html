@@ -3,753 +3,831 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0c0805" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#fbf6ee" />
 
-  <title>ilFornino® — Wood-Fired Pizza Ovens, Hand-Built in the Spirit of Naples</title>
-  <meta name="description" content="ilFornino crafts heirloom wood-fired pizza ovens that turn fire and stone into 90-second Neapolitan pizza. Discover the Fiamma Rossa, Professional, Platinum and Napolicento series — engineered in Valley Cottage, NY, inspired by Modena, Italy." />
-  <meta name="keywords" content="wood fired pizza oven, neapolitan oven, ilFornino, Fiamma Rossa, Professional Series, Napolicento, outdoor pizza oven, italian oven" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="ilFornino® — Fire. Stone. Italy." />
-  <meta property="og:description" content="Hand-built wood-fired ovens that bring the soul of Naples to your backyard." />
-  <meta property="og:image" content="assets/img/og-cover.jpg" />
+  <title>ilFornino® — World-class wood-fired pizza ovens, hand-built in New York</title>
+  <meta name="description" content="The pizza you taste in Naples — at home, in 90 seconds. Discover ilFornino's hand-built wood-fired, gas and hybrid pizza ovens. Free shipping. 5-year warranty. Backed by 12,000 happy cooks." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Italianno&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=Newsreader:ital,wght@1,400;1,500&display=swap" rel="stylesheet" />
 
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin />
-
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='28'%3E%F0%9F%94%A5%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23d23f1c'/%3E%3Ctext y='23' x='5' font-size='22' font-family='Arial' font-weight='900' fill='%23fbf6ee'%3Ei%3C/text%3E%3C/svg%3E" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-<body data-theme="ember">
+<body>
 
-  <!-- ░░░░░░ PRELOADER ░░░░░░ -->
-  <div class="preloader" aria-hidden="true" id="preloader">
-    <div class="preloader__shell">
-      <svg class="preloader__flame" viewBox="0 0 100 140" aria-hidden="true">
-        <defs>
-          <linearGradient id="flameGrad" x1="0" x2="0" y1="1" y2="0">
-            <stop offset="0%" stop-color="#7a1500"/>
-            <stop offset="40%" stop-color="#e64314"/>
-            <stop offset="80%" stop-color="#ffb13d"/>
-            <stop offset="100%" stop-color="#fff2c4"/>
-          </linearGradient>
-        </defs>
-        <path class="preloader__flame-path" d="M50 130 C 8 110, 14 70, 32 56 C 30 78, 46 78, 44 60 C 60 70, 64 42, 50 26 C 70 36, 86 60, 84 86 C 82 116, 70 130, 50 130 Z" fill="url(#flameGrad)"/>
-      </svg>
-      <div class="preloader__brand">
-        <span class="preloader__lettering">ilFornino</span>
-        <span class="preloader__sub">est. Modena · Made in N.Y.</span>
-      </div>
-      <div class="preloader__bar"><span></span></div>
-      <div class="preloader__count" data-count>00</div>
+  <!-- ░░░ TOP PROMO BAR ░░░ -->
+  <div class="promo-bar" role="region" aria-label="Promotions">
+    <div class="promo-bar__track">
+      <span><b>★</b> Free U.S. shipping on orders over $1,500</span>
+      <span><b>·</b> $250 off Fiamma Rossa this week — code <code>FUOCO</code></span>
+      <span><b>·</b> 5-year craftsmanship warranty</span>
+      <span><b>·</b> Live cooking class every Saturday at the atelier</span>
+      <span><b>·</b> Affirm financing from $99/mo</span>
+      <span><b>★</b> Free U.S. shipping on orders over $1,500</span>
+      <span><b>·</b> $250 off Fiamma Rossa this week — code <code>FUOCO</code></span>
+      <span><b>·</b> 5-year craftsmanship warranty</span>
+      <span><b>·</b> Live cooking class every Saturday at the atelier</span>
+      <span><b>·</b> Affirm financing from $99/mo</span>
     </div>
   </div>
 
-  <!-- ░░░░░░ EMBER CANVAS (background particles) ░░░░░░ -->
-  <canvas class="ember-canvas" id="emberCanvas" aria-hidden="true"></canvas>
-
-  <!-- ░░░░░░ CUSTOM CURSOR ░░░░░░ -->
-  <div class="cursor" aria-hidden="true">
-    <div class="cursor__dot"></div>
-    <div class="cursor__ring"></div>
-    <div class="cursor__label" data-cursor-label></div>
-  </div>
-
-  <!-- ░░░░░░ TOP TICKER ░░░░░░ -->
-  <div class="ticker" role="region" aria-label="Latest from the workshop">
-    <div class="ticker__track">
-      <span>★ Hand-built in Valley Cottage, NY</span>
-      <span>· Pizza in 90 seconds</span>
-      <span>· Made in Modena, Italy</span>
-      <span>· Free shipping over $1,500</span>
-      <span>· Pizza Academy — book a class</span>
-      <span>· Lifetime craftsmanship</span>
-      <span>★ Hand-built in Valley Cottage, NY</span>
-      <span>· Pizza in 90 seconds</span>
-      <span>· Made in Modena, Italy</span>
-      <span>· Free shipping over $1,500</span>
-      <span>· Pizza Academy — book a class</span>
-      <span>· Lifetime craftsmanship</span>
-    </div>
-  </div>
-
-  <!-- ░░░░░░ NAV ░░░░░░ -->
+  <!-- ░░░ NAV ░░░ -->
   <header class="nav" id="nav">
     <a href="#top" class="nav__logo" aria-label="ilFornino home">
-      <svg viewBox="0 0 36 36" class="nav__mark" aria-hidden="true">
-        <circle cx="18" cy="18" r="17" fill="none" stroke="currentColor" stroke-width="1.2"/>
-        <path d="M11 24 C 9 18, 14 12, 18 14 C 22 16, 18 20, 20 22 C 24 18, 26 26, 22 28 C 18 30, 12 28, 11 24 Z" fill="currentColor"/>
-      </svg>
-      <span class="nav__wordmark">ilFornino<sup>®</sup></span>
+      <span class="nav__mark">il</span>
+      <span class="nav__word">Fornino<sup>®</sup></span>
     </a>
 
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#heritage" data-link>Heritage</a>
-      <a href="#collection" data-link>Collection</a>
-      <a href="#technology" data-link>Craft</a>
-      <a href="#academy" data-link>Academy</a>
-      <a href="#stories" data-link>Stories</a>
-      <a href="#visit" data-link>Visit</a>
+    <nav class="nav__main" aria-label="Primary">
+      <div class="nav__item nav__item--has-mega">
+        <button class="nav__link" aria-haspopup="true" aria-expanded="false">
+          Pizza Ovens
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </button>
+        <div class="mega" role="menu">
+          <div class="mega__col">
+            <span class="mega__h">Shop by fuel</span>
+            <a href="#shop"><span>Wood-fired</span><em>6 ovens</em></a>
+            <a href="#shop"><span>Gas</span><em>3 ovens</em></a>
+            <a href="#shop"><span>Hybrid · Wood &amp; Gas</span><em>4 ovens</em></a>
+            <a href="#shop"><span>Commercial</span><em>2 ovens</em></a>
+          </div>
+          <div class="mega__col">
+            <span class="mega__h">By size</span>
+            <a href="#shop"><span>Compact &amp; portable</span></a>
+            <a href="#shop"><span>Backyard</span></a>
+            <a href="#shop"><span>Pro · 4-pizza</span></a>
+            <a href="#shop"><span>Restaurant</span></a>
+          </div>
+          <div class="mega__col mega__col--feature">
+            <span class="mega__h">Featured</span>
+            <a class="mega__feature" href="#fiamma">
+              <div class="mega__feature-img"></div>
+              <b>Fiamma Rossa Grande</b>
+              <i>Hybrid · Hand-built · $5,495</i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <a class="nav__link" href="#accessories">Accessories</a>
+      <a class="nav__link" href="#recipes">Recipes</a>
+      <a class="nav__link" href="#academy">Pizza Academy</a>
+      <a class="nav__link" href="#reviews">Reviews</a>
+      <a class="nav__link" href="#support">Support</a>
     </nav>
 
-    <div class="nav__actions">
-      <a href="tel:18773026660" class="nav__call" data-cursor="call">
-        <span class="nav__dot"></span>(877) 302-6660
-      </a>
-      <a href="#collection" class="btn btn--ember" data-magnetic>
-        <span>Explore the Ovens</span>
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-      </a>
-      <button class="nav__burger" aria-label="Toggle menu" aria-expanded="false" id="burger">
-        <span></span><span></span>
+    <div class="nav__tools">
+      <button class="nav__icon" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="m20 20-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav__icon" aria-label="Account">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="2" fill="none"/><path d="M4 21c1.5-4 4-6 8-6s6.5 2 8 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </button>
+      <button class="nav__icon nav__icon--cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24"><path d="M5 7h14l-2 12H7L5 7z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M9 7V5a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        <span class="nav__cart-count">2</span>
+      </button>
+      <button class="nav__burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </header>
 
-  <!-- ░░░░░░ MOBILE OVERLAY ░░░░░░ -->
-  <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
+  <!-- ░░░ MOBILE OVERLAY ░░░ -->
+  <div class="overlay" id="overlay" aria-hidden="true">
     <ul>
-      <li><a href="#heritage">Heritage <em>01</em></a></li>
-      <li><a href="#collection">Collection <em>02</em></a></li>
-      <li><a href="#technology">Craft <em>03</em></a></li>
-      <li><a href="#academy">Academy <em>04</em></a></li>
-      <li><a href="#stories">Stories <em>05</em></a></li>
-      <li><a href="#visit">Visit <em>06</em></a></li>
+      <li><a href="#shop">Pizza Ovens</a></li>
+      <li><a href="#accessories">Accessories</a></li>
+      <li><a href="#recipes">Recipes</a></li>
+      <li><a href="#academy">Pizza Academy</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#support">Support</a></li>
     </ul>
-    <div class="overlay-menu__foot">
-      <a href="tel:18773026660">(877) 302-6660</a>
+    <div class="overlay__foot">
+      <a href="tel:18773026660"><b>(877) 302-6660</b></a>
       <a href="mailto:sales@ilfornino.com">sales@ilfornino.com</a>
     </div>
   </div>
 
   <main id="top">
 
-    <!-- ░░░░░░ HERO ░░░░░░ -->
-    <section class="hero" data-scene>
-      <div class="hero__bg">
-        <div class="hero__bg-glow"></div>
-        <div class="hero__bg-grain"></div>
-        <div class="hero__bg-vignette"></div>
-      </div>
-
-      <div class="hero__rule">
-        <span>N°01 · Atelier del Forno</span>
-        <span>40°50'N · 14°15'E</span>
-      </div>
-
-      <div class="hero__inner">
-        <p class="hero__eyebrow"><span class="dot"></span>Heirloom wood-fired ovens · since the spirit of Napoli</p>
-
-        <h1 class="hero__title" data-split>
-          <span class="row">
-            <span class="word">Fire,</span>
-            <span class="word">stone,</span>
-          </span>
-          <span class="row">
-            <span class="word italics">&amp; the soul</span>
-          </span>
-          <span class="row">
-            <span class="word">of Italy.</span>
-          </span>
+    <!-- ░░░ HERO ░░░ -->
+    <section class="hero">
+      <div class="hero__copy">
+        <span class="hero__pill">
+          <span class="hero__pill-dot"></span>
+          New · Fiamma Rossa Grande Hybrid
+        </span>
+        <h1 class="hero__title">
+          Pizza night,<br/>
+          <span class="hero__title-em">in 90 <em>seconds</em>.</span>
         </h1>
-
-        <div class="hero__cta">
-          <a href="#collection" class="btn btn--ember btn--lg" data-magnetic>
-            <span>Discover the Collection</span>
-            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-          </a>
-          <a href="#academy" class="btn btn--ghost btn--lg" data-cursor="play">
-            <span class="btn__play">
-              <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
-            </span>
-            <span>Watch the film</span>
-          </a>
-        </div>
-
         <p class="hero__lede">
-          For three generations, our family has built ovens that turn flour, water, fire and stone into something close to a religion. Each ilFornino is hand-welded, seasoned, and tuned by ear — ready to deliver a 90-second Neapolitan pizza on the night it arrives.
+          The wood-fired oven that turns your backyard into a Neapolitan pizzeria. Hand-built in New York. Tested by chefs in Modena. Loved in 12,000 backyards across America.
         </p>
-      </div>
-
-      <div class="hero__bottom">
-        <div class="hero__bottom-l">
-          <span class="num">04</span>
-          <span class="lbl">Pizzas at once</span>
-        </div>
-        <div class="hero__bottom-c">
-          <span class="num">1000°</span>
-          <span class="lbl">Stone-floor heat</span>
-        </div>
-        <div class="hero__bottom-r">
-          <span class="num">90″</span>
-          <span class="lbl">From rim to char</span>
-        </div>
-      </div>
-
-      <a class="hero__scroll" href="#heritage" aria-label="Scroll to story">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 80" aria-hidden="true"><path d="M12 0v74m-6-6 6 6 6-6" stroke="currentColor" stroke-width="1" fill="none"/></svg>
-      </a>
-
-      <!-- Decorative floating fire SVG -->
-      <svg class="hero__flame-art" viewBox="0 0 600 700" aria-hidden="true">
-        <defs>
-          <radialGradient id="hg1" cx="50%" cy="70%" r="60%">
-            <stop offset="0%" stop-color="#ffe2a8" stop-opacity=".95"/>
-            <stop offset="35%" stop-color="#ff7a18" stop-opacity=".75"/>
-            <stop offset="70%" stop-color="#7a1500" stop-opacity=".25"/>
-            <stop offset="100%" stop-color="#0c0805" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <ellipse cx="300" cy="500" rx="280" ry="220" fill="url(#hg1)"/>
-      </svg>
-    </section>
-
-    <!-- ░░░░░░ INFINITE MARQUEE ░░░░░░ -->
-    <section class="marquee" aria-hidden="true">
-      <div class="marquee__track">
-        <span>Neapolitan craft</span><i>✦</i>
-        <span>One Flat Cooking Surface™</span><i>✦</i>
-        <span>1007 sq in</span><i>✦</i>
-        <span>Hand-welded in NY</span><i>✦</i>
-        <span>Stainless &amp; firebrick</span><i>✦</i>
-        <span>Wood · Gas · Hybrid</span><i>✦</i>
-        <span>Neapolitan craft</span><i>✦</i>
-        <span>One Flat Cooking Surface™</span><i>✦</i>
-        <span>1007 sq in</span><i>✦</i>
-        <span>Hand-welded in NY</span><i>✦</i>
-        <span>Stainless &amp; firebrick</span><i>✦</i>
-        <span>Wood · Gas · Hybrid</span><i>✦</i>
-      </div>
-    </section>
-
-    <!-- ░░░░░░ HERITAGE — STICKY STORY ░░░░░░ -->
-    <section class="heritage" id="heritage" data-scene>
-      <div class="heritage__sticky">
-        <div class="heritage__media">
-          <figure class="heritage__figure" data-figure="0">
-            <span class="heritage__chapter">Chapter I</span>
-            <div class="heritage__img heritage__img--napoli"></div>
-          </figure>
-          <figure class="heritage__figure" data-figure="1">
-            <span class="heritage__chapter">Chapter II</span>
-            <div class="heritage__img heritage__img--dough"></div>
-          </figure>
-          <figure class="heritage__figure" data-figure="2">
-            <span class="heritage__chapter">Chapter III</span>
-            <div class="heritage__img heritage__img--steel"></div>
-          </figure>
-          <figure class="heritage__figure" data-figure="3">
-            <span class="heritage__chapter">Chapter IV</span>
-            <div class="heritage__img heritage__img--char"></div>
-          </figure>
-        </div>
-
-        <div class="heritage__copy">
-          <header class="heritage__head">
-            <span class="kicker">Heritage</span>
-            <h2 class="heritage__title">A craft we inherited <em>by firelight.</em></h2>
-          </header>
-
-          <article class="heritage__chap" data-chap="0">
-            <h3>Born in Napoli, raised by the wood-fire.</h3>
-            <p>The Neapolitan oven is older than the country it lives in. We trace ours to <em>Modena</em>, where my grandfather lined his first dome with refractory brick and taught a stubborn kid the difference between flame and ember.</p>
-          </article>
-
-          <article class="heritage__chap" data-chap="1">
-            <h3>Flour, water, salt, fire — &amp; time.</h3>
-            <p>Real Neapolitan dough is alive. We design our chambers around it: a low domed ceiling that bounces 900° of heat onto the rim, a stone floor that gives the bottom a leopard-spot kiss in less than two minutes.</p>
-          </article>
-
-          <article class="heritage__chap" data-chap="2">
-            <h3>The atelier in Valley Cottage.</h3>
-            <p>Each oven is welded by hand from heavy-gauge stainless steel, blanketed in two inches of ceramic-fiber insulation, and seasoned over a 12-hour curing fire before it leaves us. No two domes ring quite the same — that is part of the contract.</p>
-          </article>
-
-          <article class="heritage__chap" data-chap="3">
-            <h3>Yours for a generation.</h3>
-            <p>An ilFornino is built to outlive its first cook, its first patio, its first house. We sign every chamber, ship it ready to fire, and answer the phone when you call. That is the whole philosophy.</p>
-          </article>
-
-          <a href="#collection" class="link-arrow" data-magnetic>Meet the collection
-            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="hero__cta">
+          <a href="#shop" class="btn btn--red"><span>Shop pizza ovens</span>
+            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
+          <a href="#academy" class="btn btn--ghost"><span>How it works</span></a>
+        </div>
+        <div class="hero__trust">
+          <div class="hero__trust-stars">★★★★★</div>
+          <div class="hero__trust-meta">
+            <b>4.9 / 5</b>
+            <span>from 4,200+ verified reviews</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__visual-bg"></div>
+        <div class="hero__price-tag">
+          <i>From</i>
+          <b>$1,499</b>
+          <em>or $99/mo with Affirm</em>
+        </div>
+        <div class="hero__product">
+          <div class="hero__oven" data-tilt>
+            <div class="hero__oven-body"></div>
+            <div class="hero__oven-mouth"></div>
+            <div class="hero__oven-fire"></div>
+            <div class="hero__oven-stand"></div>
+          </div>
+          <div class="hero__pizza" aria-hidden="true">
+            <div class="hero__pizza-disc"></div>
+          </div>
+        </div>
+        <div class="hero__sticker hero__sticker--1">90<sup>″</sup><span>cook</span></div>
+        <div class="hero__sticker hero__sticker--2">1000<sup>°</sup><span>stone heat</span></div>
+        <div class="hero__sticker hero__sticker--3">4<sup>×</sup><span>12″ pies at once</span></div>
+      </div>
+    </section>
+
+    <!-- ░░░ STRIP / VALUE PROPS ░░░ -->
+    <section class="value-strip">
+      <div class="value-strip__inner">
+        <div class="value-strip__cell">
+          <span class="value-strip__icon">
+            <svg viewBox="0 0 24 24"><path d="M3 17l4-3 4 4 6-7 4 4M3 21h18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <b>Free U.S. shipping</b>
+            <span>on orders over $1,500</span>
+          </div>
+        </div>
+        <div class="value-strip__cell">
+          <span class="value-strip__icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3l9 4-2 12-7 2-7-2-2-12 9-4z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/><path d="M9 12l2 2 4-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <b>5-year warranty</b>
+            <span>on every dome</span>
+          </div>
+        </div>
+        <div class="value-strip__cell">
+          <span class="value-strip__icon">
+            <svg viewBox="0 0 24 24"><path d="M5 21V8l7-5 7 5v13M9 21v-7h6v7" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+          </span>
+          <div>
+            <b>Hand-built in New York</b>
+            <span>since the spirit of Napoli</span>
+          </div>
+        </div>
+        <div class="value-strip__cell">
+          <span class="value-strip__icon">
+            <svg viewBox="0 0 24 24"><path d="M3 17h18M5 17V8c0-2 1-3 3-3h8c2 0 3 1 3 3v9M9 13h6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <div>
+            <b>30-day try-at-home</b>
+            <span>love it or full refund</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ░░░░░░ STATS / NUMBERS ░░░░░░ -->
-    <section class="stats" data-scene>
-      <div class="stats__head">
-        <span class="kicker">By the numbers</span>
-        <h2>An oven measured in <em>seconds</em>, <em>degrees</em>, and <em>generations.</em></h2>
-      </div>
-      <ul class="stats__grid">
-        <li>
-          <span class="stats__num" data-counter="90" data-suffix="″">0</span>
-          <span class="stats__label">Pizza, rim to char</span>
-          <span class="stats__rule"></span>
-          <p>Our 4-inch ceramic-fibre dome reflects flame onto a 900° stone floor — a Neapolitan crust on the first try.</p>
-        </li>
-        <li>
-          <span class="stats__num" data-counter="1007" data-suffix="″²">0</span>
-          <span class="stats__label">One Flat Cooking Surface™</span>
-          <span class="stats__rule"></span>
-          <p>The Professional and Platinum chambers fit four 12-inch pies on a single seamless slab of refractory stone.</p>
-        </li>
-        <li>
-          <span class="stats__num" data-counter="7" data-suffix="h">0</span>
-          <span class="stats__label">Heat retention</span>
-          <span class="stats__rule"></span>
-          <p>The Fiamma Rossa octagonal double-dome holds restaurant heat for up to seven hours of continuous service.</p>
-        </li>
-        <li>
-          <span class="stats__num" data-counter="3" data-suffix="g">0</span>
-          <span class="stats__label">Generations of forgers</span>
-          <span class="stats__rule"></span>
-          <p>From a Modena workshop to a Valley Cottage atelier — the same hands, the same fire, three generations on.</p>
-        </li>
-      </ul>
-    </section>
-
-    <!-- ░░░░░░ FEATURED OVEN — FIAMMA ROSSA ░░░░░░ -->
-    <section class="featured" data-scene>
-      <div class="featured__copy">
-        <span class="kicker">N°02 · Featured</span>
-        <h2 class="featured__title">Fiamma <em>Rossa</em></h2>
-        <p class="featured__lede">An octagonal double-dome in mirror-finished stainless steel. Hybrid wood / gas in a single chamber. Heat held for seven hours, ignition in under thirty.</p>
-
-        <ul class="featured__specs">
-          <li><span>Dome</span><span>Octagonal · Double wall</span></li>
-          <li><span>Insulation</span><span>4″ ceramic fibre</span></li>
-          <li><span>Cooking floor</span><span>One Flat Cooking Surface™</span></li>
-          <li><span>Fuel</span><span>Wood · Gas · Hybrid</span></li>
-          <li><span>Build</span><span>304 stainless · MIG-welded</span></li>
-          <li><span>Origin</span><span>Hand-finished, Valley Cottage NY</span></li>
-        </ul>
-
-        <div class="featured__cta">
-          <a href="#collection" class="btn btn--ember" data-magnetic><span>Configure yours</span>
-            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-          </a>
-          <a href="#academy" class="link-arrow">See it cook</a>
-        </div>
-      </div>
-
-      <div class="featured__visual">
-        <div class="featured__halo"></div>
-        <div class="featured__oven" data-tilt>
-          <div class="featured__oven-shadow"></div>
-          <div class="featured__oven-art"></div>
-          <div class="featured__oven-glow"></div>
-          <div class="featured__oven-fire"></div>
-        </div>
-        <div class="featured__caption">
-          <span>Fiamma Rossa Grande</span>
-          <span>—</span>
-          <span>Hybrid Wood &amp; Gas</span>
-        </div>
-        <div class="featured__price-tag">
-          <span class="featured__price-tag-pre">starting at</span>
-          <span class="featured__price-tag-num">$5,495</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ░░░░░░ COLLECTION GRID ░░░░░░ -->
-    <section class="collection" id="collection" data-scene>
-      <header class="collection__head">
-        <div>
-          <span class="kicker">N°03 · The Collection</span>
-          <h2>Eleven ovens. <em>One obsession.</em></h2>
-        </div>
-        <p class="collection__lede">From a portable Nino on a balcony to a Napolicento running a restaurant in Modena — every chamber is tuned around the same Neapolitan ideal.</p>
+    <!-- ░░░ CATEGORY TILES ░░░ -->
+    <section class="categories" id="shop">
+      <header class="categories__head">
+        <span class="kicker">Pick your fire</span>
+        <h2>Find <em>your</em> oven.</h2>
+        <p>Every ilFornino is hand-built. Choose by fuel, by size, or by how loud your block is going to be on Saturday.</p>
       </header>
 
-      <div class="collection__filters" role="tablist">
-        <button class="chip is-active" data-filter="all" role="tab" aria-selected="true">All <em>11</em></button>
-        <button class="chip" data-filter="residential" role="tab" aria-selected="false">Residential</button>
-        <button class="chip" data-filter="hybrid" role="tab" aria-selected="false">Wood &amp; Gas</button>
-        <button class="chip" data-filter="commercial" role="tab" aria-selected="false">Commercial</button>
-        <button class="chip" data-filter="portable" role="tab" aria-selected="false">Portable</button>
-      </div>
-
-      <div class="collection__grid">
-
-        <article class="oven oven--lg" data-cat="residential hybrid" data-tilt>
-          <div class="oven__media oven__media--fiamma">
-            <span class="oven__index">01</span>
-            <span class="oven__tag">Hybrid</span>
+      <div class="categories__grid">
+        <a href="#shop" class="cat cat--red">
+          <div class="cat__art cat__art--wood"></div>
+          <div class="cat__body">
+            <span class="cat__count">6 ovens</span>
+            <h3>Wood-fired</h3>
+            <p>The classic. Smoke, leoparding, the whole religion.</p>
+            <span class="cat__cta">Shop wood-fired
+              <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
           </div>
-          <div class="oven__body">
-            <h3>Fiamma Rossa<br/><em>Grande</em></h3>
-            <p>Octagonal double-dome, hybrid gas / wood, mirrored stainless. The flagship.</p>
-            <div class="oven__meta">
-              <span>1007 in² · 4 pies</span>
-              <a href="#" class="link-arrow">Configure</a>
+        </a>
+
+        <a href="#shop" class="cat cat--cream">
+          <div class="cat__art cat__art--gas"></div>
+          <div class="cat__body">
+            <span class="cat__count">3 ovens</span>
+            <h3>Gas</h3>
+            <p>Push-button, ready in 15. Same 90-second pizza.</p>
+            <span class="cat__cta">Shop gas
+              <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="#shop" class="cat cat--yellow">
+          <div class="cat__art cat__art--hybrid"></div>
+          <div class="cat__body">
+            <span class="cat__count">4 ovens</span>
+            <h3>Hybrid</h3>
+            <p>One chamber, two fires. Light gas, finish on wood.</p>
+            <span class="cat__cta">Shop hybrid
+              <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
+          </div>
+        </a>
+
+        <a href="#shop" class="cat cat--dark">
+          <div class="cat__art cat__art--commercial"></div>
+          <div class="cat__body">
+            <span class="cat__count">2 ovens</span>
+            <h3>Commercial</h3>
+            <p>The Napolicento. Made in Modena. For real pizzaioli.</p>
+            <span class="cat__cta">Shop commercial
+              <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ░░░ COLLECTION GRID ░░░ -->
+    <section class="grid-section">
+      <header class="grid-section__head">
+        <div>
+          <span class="kicker">The collection</span>
+          <h2>Eight bestsellers.</h2>
+        </div>
+        <div class="grid-section__filters">
+          <button class="filter is-on" data-filter="all">All <em>11</em></button>
+          <button class="filter" data-filter="residential">Residential</button>
+          <button class="filter" data-filter="hybrid">Hybrid</button>
+          <button class="filter" data-filter="commercial">Commercial</button>
+          <button class="filter" data-filter="portable">Portable</button>
+        </div>
+      </header>
+
+      <div class="products">
+
+        <article class="product" data-cat="residential hybrid">
+          <div class="product__media product__media--fiamma">
+            <span class="product__badge">Bestseller</span>
+            <button class="product__quick">Quick view</button>
+          </div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Fiamma Rossa Grande</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(842)</i></div>
+            </div>
+            <p>Hybrid wood/gas · Octagonal double-dome · 4-pizza floor</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$5,495</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
             </div>
           </div>
         </article>
 
-        <article class="oven" data-cat="residential" data-tilt>
-          <div class="oven__media oven__media--professional">
-            <span class="oven__index">02</span>
-            <span class="oven__tag">Wood</span>
+        <article class="product" data-cat="residential">
+          <div class="product__media product__media--professional">
+            <span class="product__badge product__badge--green">Hand-built NY</span>
+            <button class="product__quick">Quick view</button>
           </div>
-          <div class="oven__body">
-            <h3>Professional Series</h3>
-            <p>The original One Flat Cooking Surface™. Wood-fired, four pies in seventy seconds.</p>
-            <div class="oven__meta"><span>1007 in² · 4 pies</span><a href="#" class="link-arrow">Configure</a></div>
-          </div>
-        </article>
-
-        <article class="oven" data-cat="residential" data-tilt>
-          <div class="oven__media oven__media--platinum">
-            <span class="oven__index">03</span>
-            <span class="oven__tag">Wood</span>
-          </div>
-          <div class="oven__body">
-            <h3>Platinum Plus</h3>
-            <p>Adjustable-height stand, polished stainless dome, brushed firebrick floor.</p>
-            <div class="oven__meta"><span>1007 in² · 4 pies</span><a href="#" class="link-arrow">Configure</a></div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Professional Series</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(1,247)</i></div>
+            </div>
+            <p>Wood-fired · One Flat Cooking Surface™ · 1007 in²</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$3,295</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
-        <article class="oven oven--tall" data-cat="commercial hybrid" data-tilt>
-          <div class="oven__media oven__media--napolicento">
-            <span class="oven__index">04</span>
-            <span class="oven__tag">Commercial</span>
+        <article class="product" data-cat="residential">
+          <div class="product__media product__media--platinum">
+            <button class="product__quick">Quick view</button>
           </div>
-          <div class="oven__body">
-            <h3>Napolicento</h3>
-            <p>Made in Modena. Hybrid burner, true ristorante throughput, refractory dome.</p>
-            <div class="oven__meta"><span>Made in Italy</span><a href="#" class="link-arrow">Inquire</a></div>
-          </div>
-        </article>
-
-        <article class="oven" data-cat="residential portable" data-tilt>
-          <div class="oven__media oven__media--piccolino">
-            <span class="oven__index">05</span>
-            <span class="oven__tag">Compact</span>
-          </div>
-          <div class="oven__body">
-            <h3>Piccolino</h3>
-            <p>Powder-coated red, refractory floor, 700°F in twenty-five minutes flat.</p>
-            <div class="oven__meta"><span>29.5 × 18″</span><a href="#" class="link-arrow">Configure</a></div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Platinum Plus</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(516)</i></div>
+            </div>
+            <p>Wood-fired · Adjustable-height stand · 4 pies in 70 sec</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$3,795</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
-        <article class="oven" data-cat="residential portable" data-tilt>
-          <div class="oven__media oven__media--fseries">
-            <span class="oven__index">06</span>
-            <span class="oven__tag">Pro mini</span>
+        <article class="product" data-cat="commercial hybrid">
+          <div class="product__media product__media--napolicento">
+            <span class="product__badge product__badge--gold">Made in Italy</span>
+            <button class="product__quick">Quick view</button>
           </div>
-          <div class="oven__body">
-            <h3>F-Series Mini</h3>
-            <p>Heavy-gauge stainless, two-layer ceramic insulation, 800°F on a stand.</p>
-            <div class="oven__meta"><span>Pro · Compact</span><a href="#" class="link-arrow">Configure</a></div>
-          </div>
-        </article>
-
-        <article class="oven" data-cat="residential hybrid" data-tilt>
-          <div class="oven__media oven__media--milano">
-            <span class="oven__index">07</span>
-            <span class="oven__tag">Hybrid</span>
-          </div>
-          <div class="oven__body">
-            <h3>Milano Hybrid</h3>
-            <p>Modern dome, refined elegance, a single switch from wood to gas.</p>
-            <div class="oven__meta"><span>Wood &amp; Gas</span><a href="#" class="link-arrow">Configure</a></div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Napolicento Commercial</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(94)</i></div>
+            </div>
+            <p>Hybrid · Refractory dome · Made in Modena, Italy</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$12,995</b></span>
+              <button class="product__add">
+                <span>Inquire</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
-        <article class="oven" data-cat="residential" data-tilt>
-          <div class="oven__media oven__media--roma">
-            <span class="oven__index">08</span>
-            <span class="oven__tag">Classic</span>
+        <article class="product" data-cat="residential portable">
+          <div class="product__media product__media--piccolino">
+            <span class="product__badge product__badge--red">$200 off</span>
+            <button class="product__quick">Quick view</button>
           </div>
-          <div class="oven__body">
-            <h3>Roma Series</h3>
-            <p>Passive directional venting, classic Roman silhouette, wood-fired purist.</p>
-            <div class="oven__meta"><span>Wood</span><a href="#" class="link-arrow">Configure</a></div>
-          </div>
-        </article>
-
-        <article class="oven" data-cat="commercial hybrid" data-tilt>
-          <div class="oven__media oven__media--grande">
-            <span class="oven__index">09</span>
-            <span class="oven__tag">Pro · XL</span>
-          </div>
-          <div class="oven__body">
-            <h3>Grande G</h3>
-            <p>35.5 × 35.5 in. cooking floor, hybrid gas / wood — for kitchens that don't sleep.</p>
-            <div class="oven__meta"><span>Counter-top</span><a href="#" class="link-arrow">Configure</a></div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Piccolino Red</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(2,103)</i></div>
+            </div>
+            <p>Wood-fired · Powder-coated red · 700°F in 25 min</p>
+            <div class="product__row">
+              <span class="product__price"><s>$1,499</s><b>$1,299</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
-        <article class="oven" data-cat="residential portable" data-tilt>
-          <div class="oven__media oven__media--nino">
-            <span class="oven__index">10</span>
-            <span class="oven__tag">Portable</span>
+        <article class="product" data-cat="residential portable">
+          <div class="product__media product__media--fseries">
+            <button class="product__quick">Quick view</button>
           </div>
-          <div class="oven__body">
-            <h3>Nino</h3>
-            <p>Take it to the cabin, the boat, the rooftop. The pizza follows you.</p>
-            <div class="oven__meta"><span>Portable</span><a href="#" class="link-arrow">Configure</a></div>
-          </div>
-        </article>
-
-        <article class="oven" data-cat="residential" data-tilt>
-          <div class="oven__media oven__media--largo">
-            <span class="oven__index">11</span>
-            <span class="oven__tag">Small-space</span>
-          </div>
-          <div class="oven__body">
-            <h3>Largo</h3>
-            <p>Built for terraces and tight courtyards. No compromise on the dome.</p>
-            <div class="oven__meta"><span>Small footprint</span><a href="#" class="link-arrow">Configure</a></div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>F-Series Mini Pro</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(388)</i></div>
+            </div>
+            <p>Wood-fired · 800°F · Pro-grade compact</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$1,899</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
+        <article class="product" data-cat="residential hybrid">
+          <div class="product__media product__media--milano">
+            <button class="product__quick">Quick view</button>
+          </div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Milano Hybrid</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(294)</i></div>
+            </div>
+            <p>Hybrid · Modern silhouette · One-touch fuel switch</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$4,295</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="product" data-cat="commercial hybrid">
+          <div class="product__media product__media--grande">
+            <span class="product__badge">Pro</span>
+            <button class="product__quick">Quick view</button>
+          </div>
+          <div class="product__body">
+            <div class="product__row">
+              <h3>Grande G-Series</h3>
+              <div class="product__rate"><span>★★★★★</span><i>(127)</i></div>
+            </div>
+            <p>Hybrid · 35.5 × 35.5″ floor · Counter-top pro</p>
+            <div class="product__row">
+              <span class="product__price"><i>From</i><b>$7,995</b></span>
+              <button class="product__add">
+                <span>Add</span>
+                <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <div class="grid-section__more">
+        <a href="#" class="btn btn--ghost btn--lg"><span>See all 11 ovens</span>
+          <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </a>
       </div>
     </section>
 
-    <!-- ░░░░░░ TECHNOLOGY / CRAFT ░░░░░░ -->
-    <section class="craft" id="technology" data-scene>
-      <div class="craft__inner">
-        <header class="craft__head">
-          <span class="kicker">N°04 · Anatomy of a flame</span>
-          <h2>Six things <em>only ilFornino does</em>.</h2>
-          <p>We do not buy domes from a catalogue. We do not powder-coat over the seams. Each oven is engineered, in-house, around six obsessions.</p>
-        </header>
-
-        <div class="craft__grid">
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">01</span>
-            <h3>One Flat Cooking Surface™</h3>
-            <p>A single seamless slab of medium-density refractory stone — no joints, no cold spots, no bottoms-burned-tops-raw.</p>
-          </article>
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">02</span>
-            <h3>Octagonal Double-Dome</h3>
-            <p>An eight-faceted inner dome reflects flame onto the pie's rim, with a four-inch ceramic-fibre wall holding the heat in.</p>
-          </article>
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">03</span>
-            <h3>Hand MIG-welded 304 Stainless</h3>
-            <p>Heavy-gauge marine-grade steel, every seam laid by a human, every seam ground and finished by hand.</p>
-          </article>
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">04</span>
-            <h3>Hybrid Wood / Gas</h3>
-            <p>A propane ring tucked beside the wood-rack — push-button ignition, then drop a log on top for the flavour.</p>
-          </article>
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">05</span>
-            <h3>Twelve-hour seasoning</h3>
-            <p>Every chamber is cured on a slow fire in our shop before it ships, so it is ready for service the night it arrives.</p>
-          </article>
-          <article class="craft__card" data-tilt>
-            <span class="craft__num">06</span>
-            <h3>Lifetime workshop</h3>
-            <p>If something rings wrong, we open the dome ourselves. Spare parts, second seasonings, and warranty stay in our hands.</p>
-          </article>
+    <!-- ░░░ FEATURED — FIAMMA ROSSA ░░░ -->
+    <section class="feature" id="fiamma">
+      <div class="feature__art">
+        <div class="feature__art-bg"></div>
+        <div class="feature__art-oven">
+          <div class="feature__art-body"></div>
+          <div class="feature__art-mouth"></div>
+          <div class="feature__art-fire"></div>
+        </div>
+        <div class="feature__art-confetti">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
       </div>
-    </section>
-
-    <!-- ░░░░░░ ACADEMY ░░░░░░ -->
-    <section class="academy" id="academy" data-scene>
-      <div class="academy__media" data-tilt>
-        <div class="academy__poster"></div>
-        <button class="academy__play" data-cursor="play" aria-label="Play the film">
-          <svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg>
-        </button>
-        <div class="academy__credit">
-          <span>The atelier · Spring</span>
-          <span>03:42</span>
-        </div>
-      </div>
-
-      <div class="academy__copy">
-        <span class="kicker">N°05 · ilFornino Pizza Academy</span>
-        <h2>Master the craft <em>where it is built.</em></h2>
-        <p>Spend a day with our pizzaioli at the Valley Cottage atelier. Mill the flour, build the dough, light the oven, lay the leopard spots. You walk out with a recipe and a relationship.</p>
-        <ul class="academy__list">
-          <li><span>01</span><div><b>Foundations</b><i>Dough, fermentation, hydration · 4 hours</i></div></li>
-          <li><span>02</span><div><b>The fire</b><i>Wood selection, dome management · 3 hours</i></div></li>
-          <li><span>03</span><div><b>Service</b><i>Four-pie throughput, peel mastery · open table</i></div></li>
+      <div class="feature__copy">
+        <span class="kicker kicker--cream">★ The flagship</span>
+        <h2 class="feature__title">Meet the<br/>Fiamma <em>Rossa</em>.</h2>
+        <p class="feature__lede">
+          An octagonal double-dome in mirrored stainless. Hybrid wood / gas. Holds heat for seven hours of service. The oven we'd build for ourselves — and did.
+        </p>
+        <ul class="feature__bullets">
+          <li><b>Octagonal double-dome</b> · 4″ ceramic-fibre wall</li>
+          <li><b>One Flat Cooking Surface™</b> · 1007 sq in</li>
+          <li><b>Hybrid burner</b> · Gas ignite, wood finish</li>
+          <li><b>304 stainless</b> · Hand-MIG-welded in Valley Cottage, NY</li>
+          <li><b>Pre-seasoned</b> · 12-hour curing fire before it ships</li>
         </ul>
-        <div class="academy__cta">
-          <a href="#visit" class="btn btn--ember" data-magnetic><span>Reserve a class</span>
-            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        <div class="feature__cta">
+          <a href="#" class="btn btn--cream"><span>Configure yours · $5,495</span>
+            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
           </a>
-          <a href="#stories" class="link-arrow">Hear from past students</a>
+          <a href="#academy" class="link-arrow link-arrow--cream"><span>See it cook</span>
+            <svg viewBox="0 0 24 24"><path d="M5 4v16l13-8L5 4z" fill="currentColor"/></svg>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- ░░░░░░ TESTIMONIALS ░░░░░░ -->
-    <section class="stories" id="stories" data-scene>
-      <header class="stories__head">
-        <span class="kicker">N°06 · From the table</span>
-        <h2>Twelve thousand <em>backyards</em> &amp; restaurants.</h2>
+    <!-- ░░░ HOW IT WORKS ░░░ -->
+    <section class="howto">
+      <header class="howto__head">
+        <span class="kicker">Pizza tonight</span>
+        <h2>Four steps. <em>Ninety seconds.</em></h2>
+      </header>
+      <ol class="howto__steps">
+        <li>
+          <span class="howto__num">01</span>
+          <div class="howto__art howto__art--1"></div>
+          <h3>Light it up</h3>
+          <p>Push-button gas, or kindling and a match if you're feeling traditional. 25 minutes to 900°F.</p>
+        </li>
+        <li>
+          <span class="howto__num">02</span>
+          <div class="howto__art howto__art--2"></div>
+          <h3>Stretch the dough</h3>
+          <p>Our recipe card comes in the box. Tipo 00, 65% hydration, 24-hour cold ferment.</p>
+        </li>
+        <li>
+          <span class="howto__num">03</span>
+          <div class="howto__art howto__art--3"></div>
+          <h3>Slide it in</h3>
+          <p>Onto a 900°F refractory floor with a kiss of flame on the rim from above.</p>
+        </li>
+        <li>
+          <span class="howto__num">04</span>
+          <div class="howto__art howto__art--4"></div>
+          <h3>Eat it standing</h3>
+          <p>Ninety seconds later. Hot, leopard-spotted, gone in three minutes. Repeat.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ░░░ MARQUEE STRIP ░░░ -->
+    <section class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Hand-built in New York</span><i>★</i>
+        <span>Pizza in 90 seconds</span><i>★</i>
+        <span>Made in Modena</span><i>★</i>
+        <span>1000° stone heat</span><i>★</i>
+        <span>5-year warranty</span><i>★</i>
+        <span>12,000 happy cooks</span><i>★</i>
+        <span>Hand-built in New York</span><i>★</i>
+        <span>Pizza in 90 seconds</span><i>★</i>
+        <span>Made in Modena</span><i>★</i>
+        <span>1000° stone heat</span><i>★</i>
+        <span>5-year warranty</span><i>★</i>
+        <span>12,000 happy cooks</span><i>★</i>
+      </div>
+    </section>
+
+    <!-- ░░░ RECIPES ░░░ -->
+    <section class="recipes" id="recipes">
+      <header class="recipes__head">
+        <div>
+          <span class="kicker">Eat the manual</span>
+          <h2>Recipes from <em>the atelier</em>.</h2>
+        </div>
+        <a href="#" class="link-arrow"><span>All 240+ recipes</span>
+          <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </a>
       </header>
 
-      <div class="stories__grid">
-        <figure class="story story--lg">
-          <blockquote>
-            <p><span class="quote">“</span>The Fiamma Rossa runs my entire Friday night. We do four hundred pies between five and ten and it does not flinch. I have ovens twenty grand more expensive that don't behave this well.<span class="quote">”</span></p>
-          </blockquote>
-          <figcaption>
-            <span class="story__name">Marco D.</span>
-            <span class="story__role">Chef-owner · Trattoria Marco, Westchester NY</span>
-          </figcaption>
-          <span class="story__rate">★★★★★</span>
-        </figure>
-        <figure class="story">
-          <blockquote><p>“It arrived on a Tuesday. By Saturday I had made forty pies for the block. Thank you.”</p></blockquote>
-          <figcaption><span class="story__name">Jean &amp; Helena P.</span><span class="story__role">Connecticut</span></figcaption>
-          <span class="story__rate">★★★★★</span>
-        </figure>
-        <figure class="story">
-          <blockquote><p>“We picked the Napolicento because the team in Modena answered the phone. Built like a Ferrari.”</p></blockquote>
-          <figcaption><span class="story__name">Luca R.</span><span class="story__role">Pizzeria Brera · Brooklyn</span></figcaption>
-          <span class="story__rate">★★★★★</span>
-        </figure>
-        <figure class="story">
-          <blockquote><p>“Two days in the academy and I cook better pizza than my Italian grandfather. (Don't tell him.)”</p></blockquote>
-          <figcaption><span class="story__name">Davide M.</span><span class="story__role">Home cook</span></figcaption>
-          <span class="story__rate">★★★★★</span>
-        </figure>
-        <figure class="story">
-          <blockquote><p>“Customer service that lives up to the metal. Six years, zero issues, ten thousand pizzas.”</p></blockquote>
-          <figcaption><span class="story__name">Sarah K.</span><span class="story__role">Caterer · Hudson Valley</span></figcaption>
-          <span class="story__rate">★★★★★</span>
-        </figure>
+      <div class="recipes__grid">
+        <a href="#" class="recipe">
+          <div class="recipe__img recipe__img--margherita"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Margherita · 90 seconds</span>
+            <h3>The Margherita we build every Friday.</h3>
+            <span class="recipe__meta">★ 4.9 · 14 min · Beginner</span>
+          </div>
+        </a>
+        <a href="#" class="recipe">
+          <div class="recipe__img recipe__img--napoletana"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Napoletana · 24h cold-ferment</span>
+            <h3>Vera Pizza Napoletana, by the book.</h3>
+            <span class="recipe__meta">★ 4.8 · 25 hr · Intermediate</span>
+          </div>
+        </a>
+        <a href="#" class="recipe">
+          <div class="recipe__img recipe__img--bread"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Bread · Sourdough</span>
+            <h3>Country loaf in the residual heat.</h3>
+            <span class="recipe__meta">★ 4.9 · 36 hr · All levels</span>
+          </div>
+        </a>
+        <a href="#" class="recipe recipe--small">
+          <div class="recipe__img recipe__img--steak"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Steak · 800°F sear</span>
+            <h3>Florentine bistecca</h3>
+            <span class="recipe__meta">★ 4.9 · 30 min</span>
+          </div>
+        </a>
+        <a href="#" class="recipe recipe--small">
+          <div class="recipe__img recipe__img--veg"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Veg · Charred</span>
+            <h3>Wood-roasted peppers</h3>
+            <span class="recipe__meta">★ 4.8 · 12 min</span>
+          </div>
+        </a>
+        <a href="#" class="recipe recipe--small">
+          <div class="recipe__img recipe__img--dessert"></div>
+          <div class="recipe__body">
+            <span class="recipe__tag">Dessert · Embers</span>
+            <h3>Honey & ricotta calzone</h3>
+            <span class="recipe__meta">★ 4.9 · 8 min</span>
+          </div>
+        </a>
       </div>
     </section>
 
-    <!-- ░░░░░░ VISIT / CONTACT ░░░░░░ -->
-    <section class="visit" id="visit" data-scene>
-      <div class="visit__inner">
-        <header class="visit__head">
-          <span class="kicker">N°07 · Visit the atelier</span>
-          <h2>Light a fire <em>with us.</em></h2>
-        </header>
-
-        <div class="visit__grid">
-          <div class="visit__card">
-            <span class="visit__icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2C7 2 4 6 4 10c0 6 8 12 8 12s8-6 8-12c0-4-3-8-8-8z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="10" r="3" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-            </span>
-            <h3>Atelier &amp; Showroom</h3>
-            <p>711 Executive Blvd, Suite U<br/>Valley Cottage, NY 10989<br/>United States</p>
-            <a class="link-arrow" href="https://maps.google.com/?q=711+Executive+Blvd+Valley+Cottage+NY" target="_blank" rel="noreferrer">Open in maps</a>
-          </div>
-
-          <div class="visit__card">
-            <span class="visit__icon">
-              <svg viewBox="0 0 24 24"><path d="M3 5c0 9 7 16 16 16l2-3-5-2-2 2c-3-1-6-4-7-7l2-2-2-5-4 1z" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>
-            </span>
-            <h3>Speak with a pizzaiolo</h3>
-            <p>(877) 302-6660<br/>sales@ilfornino.com<br/>Mon–Fri 9–6 · Sat 10–2 ET</p>
-            <a class="link-arrow" href="tel:18773026660">Call the workshop</a>
-          </div>
-
-          <div class="visit__card visit__card--form">
-            <h3>Newsletter <em>· Brace di Lunedì</em></h3>
-            <p>Mondays. One letter from the workshop — recipes, fire-tending, new ovens before they list.</p>
-            <form class="visit__form" novalidate>
-              <input type="email" name="email" required placeholder="you@yourkitchen.com" autocomplete="email" />
-              <button type="submit">
-                <span>Subscribe</span>
-                <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
-              </button>
-              <small>We ash the spam. Promise.</small>
-            </form>
-          </div>
+    <!-- ░░░ REVIEWS ░░░ -->
+    <section class="reviews" id="reviews">
+      <header class="reviews__head">
+        <span class="reviews__big-num">4.9</span>
+        <div class="reviews__head-meta">
+          <div class="reviews__stars">★★★★★</div>
+          <p>From <b>4,261</b> verified backyard, restaurant and academy reviews. Powered by Yotpo.</p>
         </div>
+        <div class="reviews__bars">
+          <div><span>5</span><i><b style="--w:88%"></b></i><em>3,752</em></div>
+          <div><span>4</span><i><b style="--w:9%"></b></i><em>384</em></div>
+          <div><span>3</span><i><b style="--w:2%"></b></i><em>85</em></div>
+          <div><span>2</span><i><b style="--w:.6%"></b></i><em>26</em></div>
+          <div><span>1</span><i><b style="--w:.4%"></b></i><em>14</em></div>
+        </div>
+      </header>
+
+      <div class="reviews__grid">
+        <figure class="review">
+          <div class="review__top">
+            <span class="review__stars">★★★★★</span>
+            <span class="review__verif">Verified buyer</span>
+          </div>
+          <h3>“Restaurant pizza on Monday nights.”</h3>
+          <p>Bought the Fiamma Rossa for the patio. Two months in I'm running 50-pie parties on Saturday and getting fan mail from my neighbors. The hybrid burner is the smartest thing in my kitchen.</p>
+          <figcaption>Marco D. <span>· Westchester, NY · Owns Fiamma Rossa Grande</span></figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review__top">
+            <span class="review__stars">★★★★★</span>
+            <span class="review__verif">Verified buyer</span>
+          </div>
+          <h3>“Built like a Ferrari.”</h3>
+          <p>The Napolicento has been running my pizzeria for three years. Six hundred pies a service, three nights a week. Not a single problem. Their team in Modena answers when you call.</p>
+          <figcaption>Luca R. <span>· Pizzeria Brera, Brooklyn · Owns Napolicento</span></figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review__top">
+            <span class="review__stars">★★★★★</span>
+            <span class="review__verif">Verified buyer</span>
+          </div>
+          <h3>“Two days in their academy.”</h3>
+          <p>I now make better pizza than my Italian grandfather. (I will not be telling him.) The class is the secret weapon — book it before you buy the oven.</p>
+          <figcaption>Davide M. <span>· Home cook, NJ · Pizza Academy graduate</span></figcaption>
+        </figure>
+        <figure class="review">
+          <div class="review__top">
+            <span class="review__stars">★★★★★</span>
+            <span class="review__verif">Verified buyer</span>
+          </div>
+          <h3>“Arrived Tuesday, hit the block Saturday.”</h3>
+          <p>Pre-seasoned and ready to go. We made forty pies for the neighborhood the first weekend. Five years in, still cooks like the day it arrived.</p>
+          <figcaption>Helena P. <span>· Connecticut · Owns Professional Series</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="reviews__more">
+        <a href="#" class="btn btn--ghost btn--lg"><span>Read all 4,261 reviews</span>
+          <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ░░░ PRESS ░░░ -->
+    <section class="press">
+      <span class="press__h">As cooked in</span>
+      <ul class="press__logos">
+        <li>The New York Times</li>
+        <li>Bon Appétit</li>
+        <li>Eater</li>
+        <li>Food &amp; Wine</li>
+        <li>Forbes</li>
+        <li>Wired</li>
+        <li>Architectural Digest</li>
+      </ul>
+    </section>
+
+    <!-- ░░░ ACADEMY ░░░ -->
+    <section class="academy" id="academy">
+      <div class="academy__copy">
+        <span class="kicker kicker--cream">★ Pizza Academy</span>
+        <h2>Spend a Saturday <em>at the fire.</em></h2>
+        <p>One day at our Valley Cottage atelier with our master pizzaioli. Mill the flour. Build the dough. Light the oven. Walk out with a recipe book, a pizzaiolo's apron, and a relationship.</p>
+        <ul class="academy__bullets">
+          <li><b>Beginner</b> — Foundations of dough &amp; fire · 4 hr · $295</li>
+          <li><b>Intermediate</b> — Heat management &amp; service · 6 hr · $495</li>
+          <li><b>Pro</b> — Restaurant throughput &amp; menu · 8 hr · $895</li>
+        </ul>
+        <div class="academy__cta">
+          <a href="#" class="btn btn--cream"><span>Reserve your seat</span>
+            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="academy__media">
+        <div class="academy__media-bg"></div>
+        <button class="academy__play" aria-label="Play film">
+          <svg viewBox="0 0 24 24"><path d="M7 4v16l13-8L7 4z" fill="currentColor"/></svg>
+        </button>
+        <span class="academy__media-tag">A day at the atelier · 03:42</span>
+      </div>
+    </section>
+
+    <!-- ░░░ NEWSLETTER ░░░ -->
+    <section class="newsletter" id="support">
+      <div class="newsletter__inner">
+        <span class="kicker kicker--cream">★ Brace di Lunedì</span>
+        <h2>Get <em>$50 off</em> your first oven.</h2>
+        <p>Plus Monday-morning recipes, fire-tending tips and a heads-up on new ovens before they list.</p>
+        <form class="newsletter__form" novalidate>
+          <input type="email" name="email" required placeholder="you@yourkitchen.com" autocomplete="email" />
+          <button type="submit">
+            <span>Get my $50</span>
+            <svg viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+          </button>
+        </form>
+        <small>One letter a Monday. Unsubscribe anytime. We ash the spam.</small>
       </div>
     </section>
 
   </main>
 
-  <!-- ░░░░░░ FOOTER ░░░░░░ -->
+  <!-- ░░░ FOOTER ░░░ -->
   <footer class="footer">
     <div class="footer__top">
-      <h2 class="footer__giant" data-split>
-        <span class="row"><span class="word">Buon</span> <span class="word italics">appetito</span></span>
-        <span class="row"><span class="word">— from</span> <span class="word">our</span> <span class="word">fire</span> <span class="word">to</span> <span class="word">yours.</span></span>
-      </h2>
+      <div class="footer__brand">
+        <a href="#top" class="footer__logo">
+          <span class="footer__mark">il</span>
+          <span class="footer__word">Fornino<sup>®</sup></span>
+        </a>
+        <p class="footer__tag">Wood-fired pizza ovens, hand-built in New York since the spirit of Naples.</p>
+        <div class="footer__contact">
+          <a href="tel:18773026660" class="footer__phone">(877) 302-6660</a>
+          <a href="mailto:sales@ilfornino.com">sales@ilfornino.com</a>
+          <span>711 Executive Blvd · Suite U<br/>Valley Cottage, NY 10989</span>
+        </div>
+        <div class="footer__social">
+          <a href="#" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="17" cy="7" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="3" stroke="currentColor" stroke-width="2" fill="none"/><path d="M10 9v6l5-3-5-3z" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M14 7h3V3h-3a4 4 0 0 0-4 4v3H7v4h3v7h4v-7h3l1-4h-4V7z" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok">
+            <svg viewBox="0 0 24 24"><path d="M14 4v10a4 4 0 1 1-4-4M14 4c.5 3 2.5 5 5 5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer__cols">
+        <div>
+          <span class="footer__h">Shop</span>
+          <ul>
+            <li><a href="#">Wood-fired ovens</a></li>
+            <li><a href="#">Gas ovens</a></li>
+            <li><a href="#">Hybrid ovens</a></li>
+            <li><a href="#">Commercial</a></li>
+            <li><a href="#">Accessories</a></li>
+            <li><a href="#">Gift cards</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="footer__h">Learn</span>
+          <ul>
+            <li><a href="#">Pizza Academy</a></li>
+            <li><a href="#">Recipes</a></li>
+            <li><a href="#">Buyer's guide</a></li>
+            <li><a href="#">Heritage</a></li>
+            <li><a href="#">The atelier</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="footer__h">Support</span>
+          <ul>
+            <li><a href="#">Help center</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">Order tracking</a></li>
+            <li><a href="#">Warranty &amp; service</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Shipping</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="footer__h">Pros</span>
+          <ul>
+            <li><a href="#">Restaurant program</a></li>
+            <li><a href="#">Dealer locator</a></li>
+            <li><a href="#">Trade &amp; design</a></li>
+            <li><a href="#">Affiliate program</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="footer__cols">
-      <div>
-        <span class="footer__h">Collection</span>
-        <ul>
-          <li><a href="#">Fiamma Rossa</a></li>
-          <li><a href="#">Professional</a></li>
-          <li><a href="#">Platinum Plus</a></li>
-          <li><a href="#">Napolicento</a></li>
-          <li><a href="#">Milano Hybrid</a></li>
-          <li><a href="#">Grande G</a></li>
-          <li><a href="#">Roma · Nino · Largo</a></li>
-        </ul>
-      </div>
-      <div>
-        <span class="footer__h">Atelier</span>
-        <ul>
-          <li><a href="#heritage">Heritage</a></li>
-          <li><a href="#technology">The craft</a></li>
-          <li><a href="#academy">Pizza Academy</a></li>
-          <li><a href="#stories">Stories</a></li>
-        </ul>
-      </div>
-      <div>
-        <span class="footer__h">Workshop</span>
-        <ul>
-          <li><a href="#visit">Visit Valley Cottage</a></li>
-          <li><a href="#">Warranty &amp; service</a></li>
-          <li><a href="#">Shipping</a></li>
-          <li><a href="#">Buyer's guide</a></li>
-          <li><a href="#">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="footer__contact">
-        <span class="footer__h">Speak to us</span>
-        <a class="footer__phone" href="tel:18773026660">(877) 302-6660</a>
-        <a class="footer__email" href="mailto:sales@ilfornino.com">sales@ilfornino.com</a>
-        <p class="footer__addr">711 Executive Blvd · Suite U<br/>Valley Cottage, NY 10989</p>
-        <ul class="footer__social">
-          <li><a href="#" aria-label="Instagram">IG</a></li>
-          <li><a href="#" aria-label="Facebook">FB</a></li>
-          <li><a href="#" aria-label="YouTube">YT</a></li>
-          <li><a href="#" aria-label="Pinterest">PN</a></li>
-        </ul>
-      </div>
-    </div>
+    <div class="footer__giant" aria-hidden="true">ilFornino</div>
 
     <div class="footer__bottom">
-      <span>© <span id="year"></span> ilFornino® New York. Built by hand.</span>
+      <span>© <span id="year"></span> ilFornino® New York. Hand-built since the spirit of Napoli.</span>
       <span class="footer__legal">
         <a href="#">Terms</a><i>·</i>
         <a href="#">Privacy</a><i>·</i>
         <a href="#">Returns</a><i>·</i>
-        <a href="#">Accessibility</a>
+        <a href="#">Accessibility</a><i>·</i>
+        <a href="#">Sitemap</a>
       </span>
-      <span class="footer__sig">Forged with fire · since the spirit of Napoli</span>
+      <span class="footer__pay">VISA · MC · AMEX · Affirm · Apple Pay</span>
     </div>
-
-    <div class="footer__giant-art" aria-hidden="true">ilFornino</div>
   </footer>
 
-  <!-- Scripts -->
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
