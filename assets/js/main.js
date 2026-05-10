@@ -1,19 +1,18 @@
 /* ============================================================
-   ilFornino® — main.js v2
-   Restrained, e-commerce-grade interactivity. No frameworks.
+   ilFornino® v3 — main.js
+   Quiet, considered motion. No bouncing pizzas.
    ============================================================ */
 
 (() => {
   'use strict';
 
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isCoarse = window.matchMedia('(hover: none)').matches;
 
   /* Year */
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  /* Sticky nav shrink on scroll */
+  /* Sticky nav shrink */
   const nav = document.getElementById('nav');
   const onScroll = () => {
     if (!nav) return;
@@ -42,21 +41,35 @@
       const target = document.querySelector(href);
       if (!target) return;
       e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - 70;
+      const top = target.getBoundingClientRect().top + window.scrollY - 90;
       window.scrollTo({ top, behavior: reduced ? 'auto' : 'smooth' });
     });
   });
 
-  /* Reveal on scroll — auto-tag relevant elements */
+  /* Active section pip in nav */
+  const navAnchors = document.querySelectorAll('.nav__links a[href^="#"]');
+  const ids = Array.from(navAnchors).map((a) => a.getAttribute('href').slice(1));
+  const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navAnchors.forEach((a) => a.classList.toggle('is-active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-50% 0px -45% 0px' });
+  sections.forEach((s) => navObs.observe(s));
+
+  /* Reveal on scroll */
   const tagSelectors = [
-    '.categories__head', '.categories__grid > *',
-    '.grid-section__head', '.products > *',
-    '.feature__copy', '.feature__art',
-    '.howto__head', '.howto__steps > *',
-    '.recipes__head', '.recipes__grid > *',
-    '.reviews__head', '.reviews__grid > *',
-    '.press', '.academy__copy', '.academy__media',
-    '.newsletter__inner > *',
+    '.hero__rule', '.hero__intro', '.hero__cta', '.hero__foot',
+    '.catalog__head > *', '.row',
+    '.spread__title', '.spread__grid > *', '.spread__cta',
+    '.method__head > *', '.method__list li',
+    '.academy__title', '.academy__lede', '.academy__list > *',
+    '.stories__stage', '.stories__index',
+    '.press', '.visit__address > *', '.visit__form-wrap',
+    '.footer__manifesto', '.footer__cols > *',
   ];
   tagSelectors.forEach((sel) => {
     document.querySelectorAll(sel).forEach((el, i) => {
@@ -75,71 +88,14 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
 
-  /* Filter: collection grid */
-  const filters = document.querySelectorAll('[data-filter]');
-  const products = document.querySelectorAll('.product');
-  filters.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      filters.forEach((b) => b.classList.remove('is-on'));
-      btn.classList.add('is-on');
-      const f = btn.dataset.filter;
-      products.forEach((p) => {
-        const cats = (p.dataset.cat || '').split(' ');
-        const show = f === 'all' || cats.includes(f);
-        p.classList.toggle('is-hidden', !show);
-      });
-    });
-  });
-
-  /* Cart count: fake increment on Add */
-  const cartCount = document.querySelector('.nav__cart-count');
-  document.querySelectorAll('.product__add').forEach((b) => {
-    b.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (!cartCount) return;
-      const n = parseInt(cartCount.textContent || '0', 10) + 1;
-      cartCount.textContent = String(n);
-      cartCount.animate(
-        [{ transform: 'scale(1)' }, { transform: 'scale(1.3)' }, { transform: 'scale(1)' }],
-        { duration: 360, easing: 'cubic-bezier(.2,.8,.2,1)' }
-      );
-      // Brief flash on cart
-      const cartBtn = cartCount.parentElement;
-      cartBtn?.animate(
-        [{ background: 'transparent' }, { background: 'rgba(210,63,28,.18)' }, { background: 'transparent' }],
-        { duration: 600 }
-      );
-    });
-  });
-
-  /* Hero oven 3D tilt — light, subtle */
-  if (!isCoarse && !reduced) {
-    document.querySelectorAll('[data-tilt]').forEach((el) => {
-      const max = 8;
-      const parent = el.closest('.hero__visual') || el.parentElement;
-      let raf = null;
-      parent.addEventListener('mousemove', (e) => {
-        const r = parent.getBoundingClientRect();
-        const px = (e.clientX - r.left) / r.width - 0.5;
-        const py = (e.clientY - r.top) / r.height - 0.5;
-        const rx = py * -max;
-        const ry = px * max;
-        cancelAnimationFrame(raf);
-        raf = requestAnimationFrame(() => {
-          el.style.transition = 'transform .15s ease-out';
-          el.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
-        });
-      });
-      parent.addEventListener('mouseleave', () => {
-        cancelAnimationFrame(raf);
-        el.style.transition = '';
-        el.style.transform = '';
-      });
-    });
+  /* Hero title kinetic reveal */
+  const heroTitle = document.querySelector('.hero__title');
+  if (heroTitle) {
+    requestAnimationFrame(() => heroTitle.classList.add('is-in'));
   }
 
   /* Newsletter pseudo-submit */
-  document.querySelectorAll('.newsletter__form').forEach((f) => {
+  document.querySelectorAll('.visit__form').forEach((f) => {
     f.addEventListener('submit', (e) => {
       e.preventDefault();
       const input = f.querySelector('input[name=email]');
@@ -147,29 +103,78 @@
         input?.focus();
         f.animate(
           [{ transform: 'translateX(0)' }, { transform: 'translateX(-6px)' }, { transform: 'translateX(6px)' }, { transform: 'translateX(0)' }],
-          { duration: 300, easing: 'ease-in-out' }
+          { duration: 280, easing: 'ease-in-out' }
         );
         return;
       }
       f.innerHTML = `
-        <span style="padding:14px 22px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px;">
+        <span style="padding:14px 22px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:10px;">
           <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Saved. Code <b style="font-weight:800; letter-spacing:.05em; margin-left:4px;">FUOCO50</b> sent to your inbox.
+          Saved. Code <b style="font-weight:700; letter-spacing:.04em; margin-left:2px; color:var(--ember);">FUOCO50</b> sent to your inbox.
         </span>
       `;
       f.style.gridTemplateColumns = '1fr';
     });
   });
 
-  /* Subtle parallax on hero pizza */
-  if (!reduced) {
-    const pizza = document.querySelector('.hero__pizza');
-    if (pizza) {
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        pizza.style.translate = `0 ${y * 0.12}px`;
-      }, { passive: true });
-    }
+  /* Stories carousel */
+  const quotes = document.querySelectorAll('.quote');
+  const dots = document.querySelectorAll('.dot');
+  const navPrev = document.querySelector('.stories__nav--prev');
+  const navNext = document.querySelector('.stories__nav--next');
+  let qIndex = 0;
+  let qTimer = null;
+
+  const setQuote = (i) => {
+    qIndex = (i + quotes.length) % quotes.length;
+    quotes.forEach((q, n) => q.classList.toggle('is-active', n === qIndex));
+    dots.forEach((d, n) => d.classList.toggle('is-active', n === qIndex));
+  };
+
+  const startAuto = () => {
+    if (reduced) return;
+    stopAuto();
+    qTimer = setInterval(() => setQuote(qIndex + 1), 6500);
+  };
+  const stopAuto = () => { if (qTimer) clearInterval(qTimer); qTimer = null; };
+
+  navPrev?.addEventListener('click', () => { setQuote(qIndex - 1); startAuto(); });
+  navNext?.addEventListener('click', () => { setQuote(qIndex + 1); startAuto(); });
+  dots.forEach((d) => d.addEventListener('click', () => {
+    setQuote(parseInt(d.dataset.dot, 10));
+    startAuto();
+  }));
+
+  // Keyboard: ←/→ when stories section is in view
+  const storiesEl = document.querySelector('.stories');
+  if (storiesEl) {
+    document.addEventListener('keydown', (e) => {
+      const r = storiesEl.getBoundingClientRect();
+      const inView = r.top < window.innerHeight * 0.7 && r.bottom > window.innerHeight * 0.3;
+      if (!inView) return;
+      if (e.key === 'ArrowLeft') { setQuote(qIndex - 1); startAuto(); }
+      if (e.key === 'ArrowRight') { setQuote(qIndex + 1); startAuto(); }
+    });
+
+    // Pause auto when hovering the stage
+    const stage = storiesEl.querySelector('.stories__stage');
+    stage?.addEventListener('mouseenter', stopAuto);
+    stage?.addEventListener('mouseleave', startAuto);
+
+    // Start auto when first scrolled into view
+    const startObs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { startAuto(); startObs.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    startObs.observe(storiesEl);
   }
+
+  /* Subtle row hover sound — none. Just a tiny letterspacing shift on the price */
+  document.querySelectorAll('.row').forEach((row) => {
+    const link = row.querySelector('.row__link');
+    row.addEventListener('mouseenter', () => link?.classList.add('is-hovering'));
+    row.addEventListener('mouseleave', () => link?.classList.remove('is-hovering'));
+  });
 
 })();
