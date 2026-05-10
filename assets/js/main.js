@@ -153,43 +153,13 @@
       }
       f.innerHTML = `
         <span style="padding:14px 22px; font-weight:600; color:var(--ink); display:flex; align-items:center; gap:8px;">
-          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l5 5L20 7" stroke="currentColor" stroke-width="1.75" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
           Saved. Code <b style="font-weight:800; letter-spacing:.05em; margin-left:4px;">FUOCO50</b> sent to your inbox.
         </span>
       `;
       f.style.gridTemplateColumns = '1fr';
     });
   });
-
-  /* Sticker hover ripple — gently scale on cursor proximity */
-  if (!isCoarse && !reduced) {
-    const heroVisual = document.querySelector('.hero__visual');
-    const stickers = document.querySelectorAll('.hero__sticker');
-    if (heroVisual && stickers.length) {
-      heroVisual.addEventListener('mousemove', (e) => {
-        stickers.forEach((s) => {
-          const r = s.getBoundingClientRect();
-          const cx = r.left + r.width / 2;
-          const cy = r.top + r.height / 2;
-          const dx = e.clientX - cx;
-          const dy = e.clientY - cy;
-          const d = Math.hypot(dx, dy);
-          const max = 200;
-          if (d < max) {
-            const force = (1 - d / max) * 12;
-            const tx = (dx / d) * force;
-            const ty = (dy / d) * force;
-            s.style.translate = `${tx}px ${ty}px`;
-          } else {
-            s.style.translate = '';
-          }
-        });
-      });
-      heroVisual.addEventListener('mouseleave', () => {
-        stickers.forEach((s) => { s.style.translate = ''; });
-      });
-    }
-  }
 
   /* Subtle parallax on hero pizza */
   if (!reduced) {
